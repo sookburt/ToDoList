@@ -8,18 +8,21 @@ namespace WebAPI.DataAccess
 {
   public class DataCoordinator
   {
-    // TODO: create inMemoryDatabase private variable for interface (create interface) and inject in new constructor
+    private IDataHandler _data;
+
+    public DataCoordinator(IDataHandler data)
+    {
+      _data = data;
+    }
 
     public List<ToDoItem> GetAllTasks()
     {
-      InMemoryDatabase data = new InMemoryDatabase(); // use dependency injection to get this.
-      return data.GetTasks(); // TODO: convert to view model
+      return _data.GetTasks(); // TODO: convert to view model
     }
 
     public ToDoItem GetTaskById(int id)
     {
-      InMemoryDatabase data = new InMemoryDatabase(); // use dependency injection to get this.
-      return data.GetTaskById(id); // TODO: convert to view model
+      return _data.GetTaskById(id); // TODO: convert to view model
     }
   }
 }

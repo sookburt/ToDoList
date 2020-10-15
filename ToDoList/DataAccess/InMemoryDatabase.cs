@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace DataAccess
 {
-  public class InMemoryDatabase
+  public class InMemoryDatabase : IDataHandler
   {
 
     public List<ToDoItem> ToDoList { get; set; }

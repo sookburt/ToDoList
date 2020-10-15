@@ -12,21 +12,26 @@ namespace WebAPI.Controllers
   [ApiController]
   public class TaskController : ControllerBase
   {
-    // GET api/task
-    [HttpGet]
+    private DataCoordinator _data;
+
+    public TaskController(DataCoordinator data)
+    {
+      _data = data;
+    }
+    
+    
+    [HttpGet] // GET api/task
     public ActionResult<IEnumerable<ToDoItem>> Get()
     {
-      var data = new DataCoordinator();
-      List<ToDoItem> tasks = data.GetAllTasks();
+      List<ToDoItem> tasks = _data.GetAllTasks();
       return tasks;
     }
 
-    // GET api/task/5
-    [HttpGet("{id}")]
+    
+    [HttpGet("{id}")] // GET api/task/5
     public ActionResult<ToDoItem> Get(int id)
     {
-      var data = new DataCoordinator();
-      ToDoItem item = data.GetTaskById(id);
+      ToDoItem item = _data.GetTaskById(id);
 
       if(item == null)
       {
@@ -36,21 +41,21 @@ namespace WebAPI.Controllers
       return item;
     }
 
-    // POST api/task
-    [HttpPost]
+    
+    [HttpPost] // POST api/task
     public void Post([FromBody] ToDoItem item)
     {
 
     }
 
-    // PUT api/task/5
-    [HttpPut("{id}")]
+    
+    [HttpPut("{id}")] // PUT api/task/5
     public void Put(int id, [FromBody] ToDoItem item)
     {
     }
 
-    // DELETE api/task/5
-    [HttpDelete("{id}")]
+    
+    [HttpDelete("{id}")] // DELETE api/task/5
     public void Delete(int id)
     {
     }
