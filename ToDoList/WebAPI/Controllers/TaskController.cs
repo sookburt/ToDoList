@@ -21,17 +21,17 @@ namespace WebAPI.Controllers
     
     
     [HttpGet] // GET api/task
-    public ActionResult<IEnumerable<ToDoItem>> Get()
+    public ActionResult<IEnumerable<ToDoItemDbModel>> Get()
     {
-      List<ToDoItem> tasks = _data.GetAllTasks();
+      List<ToDoItemDbModel> tasks = _data.GetAllTasks();
       return tasks;
     }
 
     
     [HttpGet("{id}")] // GET api/task/5
-    public ActionResult<ToDoItem> Get(int id)
+    public ActionResult<ToDoItemDbModel> Get(int id)
     {
-      ToDoItem item = _data.GetTaskById(id);
+      ToDoItemDbModel item = _data.GetTaskById(id);
 
       if(item == null)
       {
@@ -43,14 +43,14 @@ namespace WebAPI.Controllers
 
     
     [HttpPost] // POST api/task
-    public void Post([FromBody] ToDoItem item)
+    public void Post([FromBody] ToDoItemDbModel item)
     {
 
     }
 
     
     [HttpPut("{id}")] // PUT api/task/5
-    public void Put(int id, [FromBody] ToDoItem item)
+    public void Put(int id, [FromBody] ToDoItemDbModel item)
     {
     }
 

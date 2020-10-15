@@ -3,6 +3,7 @@ using DataAccess.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using WebAPI.ViewModels;
 
 namespace WebAPI.DataAccess
 {
@@ -15,14 +16,61 @@ namespace WebAPI.DataAccess
       _data = data;
     }
 
-    public List<ToDoItem> GetAllTasks()
+    public List<ToDoItemViewModel> GetAllTasks()
     {
-      return _data.GetTasks(); // TODO: convert to view model
+      List<ToDoItemDbModel> dbList = _data.GetTasks();
+
+      return GetAllViewModels(dbList);
     }
 
-    public ToDoItem GetTaskById(int id)
+    public ToDoItemViewModel GetTaskById(int id)
     {
-      return _data.GetTaskById(id); // TODO: convert to view model
+      ToDoItemDbModel item = _data.GetTaskById(id);
+      return ConvertModelToViewModel(item);
     }
+
+
+
+    #region private methods
+
+      private ToDoItemViewModel ConvertModelToViewModel(ToDoItemDbModel item)
+      {
+        ToDoItemViewModel viewModel = new ToDoItemViewModel()
+        {
+          Id = item.Id,
+          Name = item.Name,
+          IsDone = item.IsDone
+        };
+
+        return viewModel;
+
+      }
+      
+      // to reduce risk of overposting.
+      private ToDoItemDbModel ConvertViewModelToModel(ToDoItemViewModel item)
+      {
+        ToDoItemDbModel model = new ToDoItemDbModel()
+        {
+          Id = item.Id,
+          Name = item.Name,
+          IsDone = item.IsDone
+        };
+
+        return model;
+
+      }
+
+    private List<ToDoItemViewModel> GetAllViewModels(List<ToDoItemDbModel> items)
+      {
+        List<ToDoItemViewModel> viewModels = new List<ToDoItemViewModel>();
+        foreach (var item in items)
+        {
+          viewModels.Add(ConvertModelToViewModel(item));
+        }
+        return viewModels;
+      }
+
+    #endregion
+
   }
 }

@@ -8,9 +8,9 @@ namespace DataAccess
   public interface IDataHandler
   {
 
-    List<ToDoItem> GetTasks();
+    List<ToDoItemDbModel> GetTasks();
 
-    ToDoItem GetTaskById(int id);
+    ToDoItemDbModel GetTaskById(int id);
 
   }
 }

@@ -8,26 +8,26 @@ namespace DataAccess
   public class InMemoryDatabase : IDataHandler
   {
 
-    public List<ToDoItem> ToDoList { get; set; }
+    public List<ToDoItemDbModel> ToDoList { get; set; }
 
     public InMemoryDatabase()
     {
-      ToDoList = new List<ToDoItem> {
-        new ToDoItem { Id = 1, Name = "Task 1", IsDone = false },
-        new ToDoItem { Id = 2, Name = "Task 2", IsDone = false }
+      ToDoList = new List<ToDoItemDbModel> {
+        new ToDoItemDbModel { Id = 1, Name = "Task 1", IsDone = false },
+        new ToDoItemDbModel { Id = 2, Name = "Task 2", IsDone = false }
       };
     }
 
-    public List<ToDoItem> GetTasks()
+    public List<ToDoItemDbModel> GetTasks()
     {
       return ToDoList;
     }
 
-    public ToDoItem GetTaskById(int id)
+    public ToDoItemDbModel GetTaskById(int id)
     {
-      Dictionary<int, ToDoItem> d = ToDoList.ToDictionary(x => x.Id, x => x);
+      Dictionary<int, ToDoItemDbModel> d = ToDoList.ToDictionary(x => x.Id, x => x);
 
-      bool exists = d.TryGetValue(id, out ToDoItem item);
+      bool exists = d.TryGetValue(id, out ToDoItemDbModel item);
 
       if(exists)
       {

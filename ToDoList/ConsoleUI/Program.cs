@@ -15,7 +15,7 @@ namespace ConsoleUI
       }
     }
 
-    private static List<ToDoItem> GetTasks()
+    private static List<ToDoItemDbModel> GetTasks()
     {
       InMemoryDatabase data = new InMemoryDatabase();
       return data.GetTasks();
